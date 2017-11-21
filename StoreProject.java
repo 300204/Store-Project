@@ -12,10 +12,20 @@ public class StoreProject
    public static void main(String[] args)
    {
       Scanner keyboard = new Scanner(System.in);               // reads user input
-      double quantity = 0;                                    // quantity of item ordered                        
-      double subtotal = 0.0;                                  // subtotal of customer's purchase                      
-      double taxAmount = 0.0;                                 // total amount of tax                  
-      double totalCost = 0.0;                                 // total cost of purchase                     
+      double quantity = 0;                                     // quantity of item ordered
+      double quantity2 = 0;                                    // quantity of item ordered
+      double quantity3 = 0;                                    // quantity of item ordered
+      double quantity4 = 0;                                    // quantity of item ordered
+      double quantity5 = 0;                                    // quantity of item ordered
+      double quantity6 = 0;                                    // quantity of item ordered
+      double quantity7 = 0;                                    // quantity of item ordered
+      double quantity8 = 0;                                    // quantity of item ordered
+      double quantity9 = 0;                                    // quantity of item ordered
+      double quantity10 = 0;
+                             
+      double subtotal = 0.0;                                   // subtotal of customer's purchase                      
+      double taxAmount = 0.0;                                  // total amount of tax                  
+      double totalCost = 0.0;                                  // total cost of purchase                     
       final double TAX_RATE = 0.06999;                         // tax rate
       //prices of photos and paintings
       final double RANDOM_PORTRAIT_PRICE = 10.0;               // price per portrait of random person              
@@ -33,15 +43,51 @@ public class StoreProject
 
       // ******************************* user inputs
       displayStoreTitle();
-      System.out.print("################# Enter ##################");
+      System.out.println("Enter The Number Of Random Portraits ");
       quantity = keyboard.nextDouble();
       keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
       
+      System.out.println("Enter The Number Of Custom Portraits ");
+      quantity2 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+
+      System.out.println("Enter The Number Of Custom Portrait Paintings ");
+      quantity3 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Landscape Pictures ");
+      quantity4 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Landscape Paintings ");
+      quantity5 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Custom Landscape Pictures ");
+      quantity6 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Custom Landscape Paintings ");
+      quantity7 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Large Round Brushes ");
+      quantity8 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Medium Round Brushes ");
+      quantity9 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      System.out.println("Enter The Number Of Small Round Brushes ");
+      quantity10 = keyboard.nextDouble();
+      keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
       // ******************************* computations
-      subtotal = quantity * RANDOM_PORTRAIT_PRICE + CUSTOM_PORTRAIT_PRICE + 
-      CUSTOM_PORTRAIT_PAINTING + LANDSCAPE_PIC_PRICE + LANDSCAPE_PAINTING_PRICE + 
-      CUSTOM_LANDSCAPE_PIC_PRICE + CUSTOM_LANDSCAPE_PAINTING_PRICE  + LARGE_ROUND_BRUSH_PRICE + 
-      MEDIUM_ROUND_BRUSH_PRICE + SMALL_ROUND_BRUSH_PRICE;
+      subtotal = quantity * RANDOM_PORTRAIT_PRICE + quantity2 * CUSTOM_PORTRAIT_PRICE + 
+      quantity3 * CUSTOM_PORTRAIT_PAINTING + quantity4 * LANDSCAPE_PIC_PRICE + quantity5 * LANDSCAPE_PAINTING_PRICE +                  // Gets the sumtotal of all the objects the user would like to buy
+      quantity6 * CUSTOM_LANDSCAPE_PIC_PRICE + quantity7 * CUSTOM_LANDSCAPE_PAINTING_PRICE  + quantity8 * LARGE_ROUND_BRUSH_PRICE + 
+      quantity9 * MEDIUM_ROUND_BRUSH_PRICE + quantity10 * SMALL_ROUND_BRUSH_PRICE;
       taxAmount = computeTax(subtotal, TAX_RATE);
 
       totalCost = subtotal + taxAmount;
@@ -60,4 +106,15 @@ public class StoreProject
    {
       return amount * taxRate;
    }// end of computeTax   
-} 
+}
+
+class UserOrder
+{
+   public void userAnswer()
+   {
+      UserInput str = keyboard.nextline();  
+   
+   }
+
+
+}
