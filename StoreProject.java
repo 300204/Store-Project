@@ -26,7 +26,7 @@ public class StoreProject
       double subtotal = 0.0;                                   // subtotal of customer's purchase                      
       double taxAmount = 0.0;                                  // total amount of tax                  
       double totalCost = 0.0;                                  // total cost of purchase                     
-      final double TAX_RATE = 0.06999;                         // tax rate
+      final double TAX_RATE = 0.05999;                         // tax rate
       //prices of photos and paintings
       final double RANDOM_PORTRAIT_PRICE = 10.0;               // price per portrait of random person              
       final double CUSTOM_PORTRAIT_PRICE = 15.0;               // price per custom portrait photo
@@ -43,6 +43,12 @@ public class StoreProject
 
       // ******************************* user inputs
       displayStoreTitle();
+      UserOrder.userOrder();
+      
+      
+   
+      
+      /*
       System.out.println("Enter The Number Of Random Portraits ");
       quantity = keyboard.nextDouble();
       keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
@@ -54,6 +60,11 @@ public class StoreProject
       System.out.println("Enter The Number Of Custom Portrait Paintings ");
       quantity3 = keyboard.nextDouble();
       keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      
+      
+      
+      
+      
       
       System.out.println("Enter The Number Of Landscape Pictures ");
       quantity4 = keyboard.nextDouble();
@@ -82,6 +93,7 @@ public class StoreProject
       System.out.println("Enter The Number Of Small Round Brushes ");
       quantity10 = keyboard.nextDouble();
       keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      */
       
       // ******************************* computations
       subtotal = quantity * RANDOM_PORTRAIT_PRICE + quantity2 * CUSTOM_PORTRAIT_PRICE + 
@@ -110,11 +122,39 @@ public class StoreProject
 
 class UserOrder
 {
-   public void userAnswer()
+   public static void userOrder()
    {
-      UserInput str = keyboard.nextline();  
+      Scanner keyboard2 = new Scanner(System.in);               // reads user input
+      System.out.println("\nWhat would you like to purchase today?");
+      String userInput = "";
+      userInput = keyboard2.nextLine();
+      userInput = userInput.toLowerCase(); 
+      System.out.println(userInput);///////////////////////////////////////////////////////////////////////////////////
+      boolean foundWord = false;
+      
+      String[] randomWords = {"random portait", "random portrait.", "random portraits", "random portraits.", "test"};
+      
+      for (int i = 0; i < randomWords.length; i++)
+      {
+      
+System.out.println("*" + userInput + "*   ?=   %" + randomWords[i] + "%");
+         if (userInput.indexOf(randomWords[i]) >= 0)
+         {
+            System.out.println("We found it!");
+            foundWord = true;
+            break;
+         }
+
+      
+      }
    
-   }
+      if (!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }
+   
+   
+   }// end of method  ??
 
 
-}
+}// end of class ?
