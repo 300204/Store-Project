@@ -1,0 +1,309 @@
+/*
+   Store Project 
+   @author Michael Imbesi
+*/
+
+import java.util.Scanner;
+import java.util.Random;
+import java.awt.Color;
+
+public class StoreProject
+{
+   public static void main(String[] args)
+   {
+      Scanner keyboard = new Scanner(System.in);               // reads user input
+      double quantity = 0;                                     // quantity of item ordered
+      double quantity2 = 0;                                    // quantity of item ordered
+      double quantity3 = 0;                                    // quantity of item ordered
+      double quantity4 = 0;                                    // quantity of item ordered
+      double quantity5 = 0;                                    // quantity of item ordered
+      double quantity6 = 0;                                    // quantity of item ordered
+      double quantity7 = 0;                                    // quantity of item ordered
+      double quantity8 = 0;                                    // quantity of item ordered
+      double quantity9 = 0;                                    // quantity of item ordered
+      double quantity10 = 0;
+                             
+      double subtotal = 0.0;                                   // subtotal of customer's purchase                      
+      double taxAmount = 0.0;                                  // total amount of tax                  
+      double totalCost = 0.0;                                  // total cost of purchase                     
+      final double TAX_RATE = 0.05999;                         // tax rate
+      int itemOrdered = -1;
+      boolean foundWord = false; //sets a boolean variable to false which will eventually be changed
+      //prices of photos and paintings
+      final double RANDOM_PORTRAIT_PRICE = 10.0;               // price per portrait of random person              
+      final double CUSTOM_PORTRAIT_PRICE = 15.0;               // price per custom portrait photo
+      final double PORTRAIT_PAINTING = 50.0;                   // price per portrait painting
+      final double LANDSCAPE_PIC_PRICE = 20.0;                 // price per landscape photo
+      final double LANDSCAPE_PAINTING_PRICE = 30.0;            // price per landscape painting
+      final double CUSTOM_LANDSCAPE_PIC_PRICE = 50.0;          // price per custom landscape photo
+      final double CUSTOM_LANDSCAPE_PAINTING_PRICE = 75.0;     // price per custom landscape painting
+      // prices of brushes available for purchase
+      final double LARGE_BRUSH_PRICE = 5.0;              // price per large round brush
+      final double MEDIUM_BRUSH_PRICE = 3.0;             // price per medium round brush
+      final double SMALL_BRUSH_PRICE = 2.0;              // price per small round brus
+      
+      displayStoreTitle();// Calls the displatStoreTitle method 
+      itemOrdered = UserOrder.userOrder(foundWord);// Calls the userOrder method from the UserOrder class
+      UserOrder.getQuantity(itemOrdered,quantity,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity2(itemOrdered,quantity2,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity3(itemOrdered,quantity3,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity4(itemOrdered,quantity4,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity5(itemOrdered,quantity5,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity6(itemOrdered,quantity6,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity7(itemOrdered,quantity7,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity8(itemOrdered,quantity8,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity9(itemOrdered,quantity9,foundWord);//Calls the getQuantity method from the UserOrder class
+      UserOrder.getQuantity10(itemOrdered,quantity10,foundWord);//Calls the getQuantity method from the UserOrder class
+      
+      // ******************************* computations
+      subtotal = quantity * RANDOM_PORTRAIT_PRICE + quantity2 * CUSTOM_PORTRAIT_PRICE + 
+      quantity3 * PORTRAIT_PAINTING + quantity4 * LANDSCAPE_PIC_PRICE + quantity5 * LANDSCAPE_PAINTING_PRICE +   // Gets the sumtotal of all the objects the user would like to buy
+      quantity6 * CUSTOM_LANDSCAPE_PIC_PRICE + quantity7 * CUSTOM_LANDSCAPE_PAINTING_PRICE  + quantity8 * LARGE_BRUSH_PRICE + 
+      quantity9 * MEDIUM_BRUSH_PRICE + quantity10 * SMALL_BRUSH_PRICE;
+      taxAmount = computeTax(subtotal, TAX_RATE);
+
+      totalCost = subtotal + taxAmount;
+		
+      // ******************************* display the output
+      System.out.println("You owe $" + totalCost);
+   }
+   
+   
+   public static void displayStoreTitle()
+   {
+      System.out.println("***********************");
+      System.out.println("** MICHAELS ART SHOP **");
+      System.out.println("***********************");
+   }// end of displayStoreTitle
+   
+   public static double computeTax(double amount, double taxRate)
+   {
+      return amount * taxRate;
+   }// end of computeTax   
+}
+
+class UserOrder
+{
+   public static int userOrder(boolean foundWord)
+   {
+      int pos = -1;           // position where user text was found, -1 if not found
+      
+      Scanner keyboard2 = new Scanner(System.in); // reads user input
+      System.out.println("\nWhat would you like to purchase today?");
+      String userInput = "";
+      userInput = keyboard2.nextLine();
+      userInput = userInput.toLowerCase(); // Sets the string variable userInput equal to all lowercase letters to aid the process of determining what the user would like to buy                                                    boolean foundWord = false;                                                                                        
+      // Creates a list will be used in unison with an index of command will determind if & what the user will buy   
+      String[] possibleWords = {"random portrait", "random portrait.", "random portraits", "random portraits.",                                          // Position 0         
+                                "custom portrait", "custom portrait.", "custom portraits", "custom portraits.",                                          // Position 4
+                                "portrait painting", "portrait painting.", "portrait paintings", "portrait paintings.",                                  // Position 8
+                                "random landscape", "random landscape.", "random landscapes", "random landscapes.",                                      // Position 12
+                                "custom landscape", "custom landscape.", "custom landscapes", "custom landscapes.",                                      // Position 16
+                                "landscape painting", "landscape painting.", "landscape paintings", "landscape paintings.",                              // Position 20
+                                "custom landscape painting", "custom landscape painting.", "custom landscape paintings", "custom landscape paintings.",  // Position 24
+                                "large brush", "large brush.", "large brushes", "large brushes.",                                                        // Position 28
+                                "medium brush", "medium brush.", "medium brushes", "medium brushes.",                                                    // Position 32
+                                "small brush", "small brush.", "small brushes", "small brushes."};                                                       // Position 36
+                                                                                                                                                  
+      for (int i = 0; i < possibleWords.length; i++)
+      {
+      
+         if (userInput.indexOf(possibleWords[i]) >= 0)
+         {
+            System.out.println("We found it!");
+            foundWord = true;
+            pos = i; // Sets the variable itemOrdered equal to it's position when indexed
+            System.out.println(pos);/////
+            break;
+         } 
+      }
+   
+      if (!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }
+   
+      return pos;
+   }// end of method userOrder
+
+
+   public static void getQuantity(int itemOrdered, double quantity, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 0))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }
+    
+   }//end of getQuantity method
+
+   
+   public static void getQuantity2(int itemOrdered, double quantity2, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 4))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity2 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      } 
+   }//end of getQuantity2 method
+
+   
+   public static void getQuantity3(int itemOrdered, double quantity3, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 8))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity3 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }   
+   }//end of getQuantity3 method
+   
+   
+   public static void getQuantity4(int itemOrdered, double quantity4, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 12))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity4 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }   
+   }//end of getQuantity4 method
+
+   
+   public static void getQuantity5(int itemOrdered, double quantity5, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 16))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity5 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }  
+   }//end of getQuantity5 method
+
+   
+   public static void getQuantity6(int itemOrdered, double quantity6, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 20))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity6 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }  
+   }//end of getQuantity6 method
+
+   
+   public static void getQuantity7(int itemOrdered, double quantity7, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 24))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity7 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }   
+   }//end of getQuantity7 method
+
+
+   public static void getQuantity8(int itemOrdered, double quantity8, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 28))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity8 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }   
+   }//end of getQuantity8 method
+
+
+
+   public static void getQuantity9(int itemOrdered, double quantity9, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 32))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity9 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }   
+   }//end of getQuantity9 method
+
+
+   public static void getQuantity10(int itemOrdered, double quantity10, boolean foundWord)
+   {
+      Scanner keyboard = new Scanner(System.in);
+      if ((itemOrdered == 36))
+      {
+         System.out.println("random portrait");
+         System.out.println("Enter The Number Of Random Portraits ");
+         quantity10 = keyboard.nextDouble();
+         keyboard.nextLine();    // get rid of hidden \n in the keyboard buffer
+      }
+      else if(!foundWord)
+      {
+         System.out.println("We are sorry, but your order cannot be completed at this time.");
+      }  
+   }//end of getQuantity10 method
+
+
+
+
+
+
+
+
+
+} // end of class UserOrder
